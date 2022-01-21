@@ -1,0 +1,563 @@
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| student_info      |
++-------------------+
+1 row in set (0.21 sec)
+
+mysql> select * from student_info;
++------+--------+---------+--------+
+| name | rollno | address | course |
++------+--------+---------+--------+
+| tanu |   1001 | sre     | btech  |
++------+--------+---------+--------+
+1 row in set (0.14 sec)
+
+mysql> insert into student_info values('kanika','1002','sre','bca');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> select * from student_info;
++--------+--------+---------+--------+
+| name   | rollno | address | course |
++--------+--------+---------+--------+
+| tanu   |   1001 | sre     | btech  |
+| kanika |   1002 | sre     | bca    |
++--------+--------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> create database emp;
+Query OK, 1 row affected (0.24 sec)
+
+mysql> use emp;
+Database changed
+mysql> create table emp_info(id int(5) primary key ,name varchar(10),address varchar(20),sal bigint(10));
+Query OK, 0 rows affected, 2 warnings (2.82 sec)
+
+mysql>
+mysql> desc emp_info
+    -> ;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | NO   | PRI | NULL    |       |
+| name    | varchar(10) | YES  |     | NULL    |       |
+| address | varchar(20) | YES  |     | NULL    |       |
+| sal     | bigint      | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.13 sec)
+
+mysql> insert into emp_info values('101','amit','sre','10000'),('102','ajay','delhi','20000'),('103','renu','hbd','30000');
+Query OK, 3 rows affected (0.55 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *from emp_info;
++-----+------+---------+-------+
+| id  | name | address | sal   |
++-----+------+---------+-------+
+| 101 | amit | sre     | 10000 |
+| 102 | ajay | delhi   | 20000 |
+| 103 | renu | hbd     | 30000 |
++-----+------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into emp_info values('104','mahi','sre','100000'),('105','sristi','noida','200000'),('106','rupal','sre','300000');
+Query OK, 3 rows affected (0.26 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *from emp_info;
++-----+--------+---------+--------+
+| id  | name   | address | sal    |
++-----+--------+---------+--------+
+| 101 | amit   | sre     |  10000 |
+| 102 | ajay   | delhi   |  20000 |
+| 103 | renu   | hbd     |  30000 |
+| 104 | mahi   | sre     | 100000 |
+| 105 | sristi | noida   | 200000 |
+| 106 | rupal  | sre     | 300000 |
++-----+--------+---------+--------+
+6 rows in set (0.09 sec)
+
+mysql> insert into emp_info values('107','ani','delhi','400000'),('108','kanak','noida','300000'),('109','rupali','gng','600000');
+Query OK, 3 rows affected (0.17 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *from emp_info;
++-----+--------+---------+--------+
+| id  | name   | address | sal    |
++-----+--------+---------+--------+
+| 101 | amit   | sre     |  10000 |
+| 102 | ajay   | delhi   |  20000 |
+| 103 | renu   | hbd     |  30000 |
+| 104 | mahi   | sre     | 100000 |
+| 105 | sristi | noida   | 200000 |
+| 106 | rupal  | sre     | 300000 |
+| 107 | ani    | delhi   | 400000 |
+| 108 | kanak  | noida   | 300000 |
+| 109 | rupali | gng     | 600000 |
++-----+--------+---------+--------+
+9 rows in set (0.01 sec)
+
+mysql> select name,sal from emp_info;
++--------+--------+
+| name   | sal    |
++--------+--------+
+| amit   |  10000 |
+| ajay   |  20000 |
+| renu   |  30000 |
+| mahi   | 100000 |
+| sristi | 200000 |
+| rupal  | 300000 |
+| ani    | 400000 |
+| kanak  | 300000 |
+| rupali | 600000 |
++--------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select name,address from emp_info where address='sre';
++-------+---------+
+| name  | address |
++-------+---------+
+| amit  | sre     |
+| mahi  | sre     |
+| rupal | sre     |
++-------+---------+
+3 rows in set (0.00 sec)
+
+mysql> update emp_info set sal='3000' where name='mahi';
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select name,sal from emp_info;
++--------+--------+
+| name   | sal    |
++--------+--------+
+| amit   |  10000 |
+| ajay   |  20000 |
+| renu   |  30000 |
+| mahi   |   3000 |
+| sristi | 200000 |
+| rupal  | 300000 |
+| ani    | 400000 |
+| kanak  | 300000 |
+| rupali | 600000 |
++--------+--------+
+9 rows in set (0.10 sec)
+
+mysql> select distinct  name,address from emp_info;
++--------+---------+
+| name   | address |
++--------+---------+
+| amit   | sre     |
+| ajay   | delhi   |
+| renu   | hbd     |
+| mahi   | sre     |
+| sristi | noida   |
+| rupal  | sre     |
+| ani    | delhi   |
+| kanak  | noida   |
+| rupali | gng     |
++--------+---------+
+9 rows in set (0.00 sec)
+
+mysql> select distinct  address,name from emp_info;
++---------+--------+
+| address | name   |
++---------+--------+
+| sre     | amit   |
+| delhi   | ajay   |
+| hbd     | renu   |
+| sre     | mahi   |
+| noida   | sristi |
+| sre     | rupal  |
+| delhi   | ani    |
+| noida   | kanak  |
+| gng     | rupali |
++---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select distinct address from emp_info;
++---------+
+| address |
++---------+
+| sre     |
+| delhi   |
+| hbd     |
+| noida   |
+| gng     |
++---------+
+5 rows in set (0.00 sec)
+
+mysql>
+mysql> select distinct address from emp_info name;
++---------+
+| address |
++---------+
+| sre     |
+| delhi   |
+| hbd     |
+| noida   |
+| gng     |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> select distinct address,name from emp_info ;
++---------+--------+
+| address | name   |
++---------+--------+
+| sre     | amit   |
+| delhi   | ajay   |
+| hbd     | renu   |
+| sre     | mahi   |
+| noida   | sristi |
+| sre     | rupal  |
+| delhi   | ani    |
+| noida   | kanak  |
+| gng     | rupali |
++---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from emp_info where address='sre' order by name;
++-----+-------+---------+--------+
+| id  | name  | address | sal    |
++-----+-------+---------+--------+
+| 101 | amit  | sre     |  10000 |
+| 104 | mahi  | sre     |   3000 |
+| 106 | rupal | sre     | 300000 |
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn+-----+-------+---------+--------+
+3 rows in set (0.02 sec)
+
+mysql> select * from emp_info order;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select * from emp_info order by name;
++-----+--------+---------+--------+
+| id  | name   | address | sal    |
++-----+--------+---------+--------+
+| 102 | ajay   | delhi   |  20000 |
+| 101 | amit   | sre     |  10000 |
+| 107 | ani    | delhi   | 400000 |
+| 108 | kanak  | noida   | 300000 |
+| 104 | mahi   | sre     |   3000 |
+| 103 | renu   | hbd     |  30000 |
+| 106 | rupal  | sre     | 300000 |
+| 109 | rupali | gng     | 600000 |
+| 105 | sristi | noida   | 200000 |
++-----+--------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from emp_info order by name asc;
++-----+--------+---------+--------+
+| id  | name   | address | sal    |
++-----+--------+---------+--------+
+| 102 | ajay   | delhi   |  20000 |
+| 101 | amit   | sre     |  10000 |
+| 107 | ani    | delhi   | 400000 |
+| 108 | kanak  | noida   | 300000 |
+| 104 | mahi   | sre     |   3000 |
+| 103 | renu   | hbd     |  30000 |
+| 106 | rupal  | sre     | 300000 |
+| 109 | rupali | gng     | 600000 |
+| 105 | sristi | noida   | 200000 |
++-----+--------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from emp_info order by name desc;
++-----+--------+---------+--------+
+| id  | name   | address | sal    |
++-----+--------+---------+--------+
+| 105 | sristi | noida   | 200000 |
+| 109 | rupali | gng     | 600000 |
+| 106 | rupal  | sre     | 300000 |
+| 103 | renu   | hbd     |  30000 |
+| 104 | mahi   | sre     |   3000 |
+| 108 | kanak  | noida   | 300000 |
+| 107 | ani    | delhi   | 400000 |
+| 101 | amit   | sre     |  10000 |
+| 102 | ajay   | delhi   |  20000 |
++-----+--------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql>Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 8.0.26 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| emp                |
+| information_schema |
+| mydata             |
+| mysql              |
+| performance_schema |
+| student            |
+| sys                |
++--------------------+
+7 rows in set (0.11 sec)
+
+mysql> use emp;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_emp |
++---------------+
+| emp_info      |
++---------------+
+1 row in set (0.11 sec)
+
+mysql> select * from emp_info;
++-----+--------+---------+--------+
+| id  | name   | address | sal    |
++-----+--------+---------+--------+
+| 101 | amit   | sre     |  10000 |
+| 102 | ajay   | delhi   |  20000 |
+| 103 | renu   | hbd     |  30000 |
+| 104 | mahi   | sre     |   3000 |
+| 105 | sristi | noida   | 200000 |
+| 106 | rupal  | sre     | 300000 |
+| 107 | ani    | delhi   | 400000 |
+| 108 | kanak  | noida   | 300000 |
+| 109 | rupali | gng     | 600000 |
++-----+--------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select address ,(count*) from emp group by address;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') from emp group by address' at line 1
+mysql> alter table emp_inf0 add workinghour int(5);
+ERROR 1146 (42S02): Table 'emp.emp_inf0' doesn't exist
+mysql> alter table emp_info add workhour int(5);
+Query OK, 0 rows affected, 1 warning (1.91 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc emp_info
+    -> ;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | NO   | PRI | NULL    |       |
+| name     | varchar(10) | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| sal      | bigint      | YES  |     | NULL    |       |
+| workhour | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update  emp_info set workhour='2' where id='101';
+Query OK, 1 row affected (0.26 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update  emp_info set workhour='2' where id='102';
+Query OK, 1 row affected (0.19 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update  emp_info set workhour='5' where id='103';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update  emp_info set workhour='8' where id='104';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update  emp_info set workhour='2' where id='105';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update  emp_info set workhour='1' where id='106';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> show tables;
++---------------+
+| Tables_in_emp |
++---------------+
+| emp_info      |
++---------------+
+1 row in set (0.24 sec)
+
+mysql> select * from emp_info
+    -> ;
++-----+--------+---------+--------+----------+
+| id  | name   | address | sal    | workhour |
++-----+--------+---------+--------+----------+
+| 101 | amit   | sre     |  10000 |        2 |
+| 102 | ajay   | delhi   |  20000 |        2 |
+| 103 | renu   | hbd     |  30000 |        5 |
+| 104 | mahi   | sre     |   3000 |        8 |
+| 105 | sristi | noida   | 200000 |        2 |
+| 106 | rupal  | sre     | 300000 |        1 |
+| 107 | ani    | delhi   | 400000 |     NULL |
+| 108 | kanak  | noida   | 300000 |     NULL |
+| 109 | rupali | gng     | 600000 |     NULL |
++-----+--------+---------+--------+----------+
+9 rows in set (0.00 sec)
+
+mysql> select name,sal from emp_info where workhour="null";
+Empty set, 1 warning (0.03 sec)
+
+mysql> select name,sal from emp_info where workhour is null;
++--------+--------+
+| name   | sal    |
++--------+--------+
+| ani    | 400000 |
+| kanak  | 300000 |
+| rupali | 600000 |
++--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> alter table emp_info add nickname  varchar(7) not null after name;
+Query OK, 0 rows affected (2.96 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp_info;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | NO   | PRI | NULL    |       |
+| name     | varchar(10) | YES  |     | NULL    |       |
+| nickname | varchar(7)  | NO   |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| sal      | bigint      | YES  |     | NULL    |       |
+| workhour | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.04 sec)
+
+mysql> select * from emp_info;
++-----+--------+----------+---------+--------+----------+
+| id  | name   | nickname | address | sal    | workhour |
++-----+--------+----------+---------+--------+----------+
+| 101 | amit   |          | sre     |  10000 |        2 |
+| 102 | ajay   |          | delhi   |  20000 |        2 |
+| 103 | renu   |          | hbd     |  30000 |        5 |
+| 104 | mahi   |          | sre     |   3000 |        8 |
+| 105 | sristi |          | noida   | 200000 |        2 |
+| 106 | rupal  |          | sre     | 300000 |        1 |
+| 107 | ani    |          | delhi   | 400000 |     NULL |
+| 108 | kanak  |          | noida   | 300000 |     NULL |
+| 109 | rupali |          | gng     | 600000 |     NULL |
++-----+--------+----------+---------+--------+----------+
+9 rows in set (0.00 sec)
+
+mysql> alter table emp_info modify nickname varchar(9);
+Query OK, 0 rows affected (2.63 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp_info;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | NO   | PRI | NULL    |       |
+| name     | varchar(10) | YES  |     | NULL    |       |
+| nickname | varchar(9)  | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| sal      | bigint      | YES  |     | NULL    |       |
+| workhour | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.03 sec)
+
+mysql> alter table emp_info rename name empname;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'empname' at line 1
+mysql> alter table emp_info change name empname varchar(10);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp_info;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | NO   | PRI | NULL    |       |
+| empname  | varchar(10) | YES  |     | NULL    |       |
+| nickname | varchar(9)  | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| sal      | bigint      | YES  |     | NULL    |       |
+| workhour | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.21 sec)
+
+mysql> alter table emp_info rename to emp;
+Query OK, 0 rows affected (1.02 sec)
+
+mysql> desc emp_info;
+ERROR 1146 (42S02): Table 'emp.emp_info' doesn't exist
+mysql> desc emp;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | NO   | PRI | NULL    |       |
+| empname  | varchar(10) | YES  |     | NULL    |       |
+| nickname | varchar(9)  | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| sal      | bigint      | YES  |     | NULL    |       |
+| workhour | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.11 sec)
+
+mysql> alter table emp drop  column nickname;
+Query OK, 0 rows affected (2.60 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | NO   | PRI | NULL    |       |
+| empname  | varchar(10) | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| sal      | bigint      | YES  |     | NULL    |       |
+| workhour | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> delete workhour from emp;
+ERROR 1109 (42S02): Unknown table 'workhour' in MULTI DELETE
+mysql> delete column workhour from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column workhour from emp' at line 1
+mysql> truncate table emp;
+Query OK, 0 rows affected (1.51 sec)
+
+mysql> select * from emp_info;
+ERROR 1146 (42S02): Table 'emp.emp_info' doesn't exist
+mysql> select * from emp;
+Empty set (0.19 sec)
+
+mysql> desc emp;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | NO   | PRI | NULL    |       |
+| empname  | varchar(10) | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| sal      | bigint      | YES  |     | NULL    |       |
+| workhour | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> drop table emp;
+Query OK, 0 rows affected (1.57 sec)
+
+mysql> desc emp;
+ERROR 1146 (42S02): Table 'emp.emp' doesn't exist
+mysql>
